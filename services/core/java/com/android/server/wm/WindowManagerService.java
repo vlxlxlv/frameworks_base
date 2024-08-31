@@ -9658,6 +9658,20 @@ public class WindowManagerService extends IWindowManager.Stub
             }
             WindowManagerService.this.requestAssistScreenshotInternal(receiver, displayId);
         }
+
+        @Override
+        public void registerDisplaySecureContentListener(DisplaySecureContentListener listener) {
+            synchronized (mGlobalLock) {
+                mDisplaySecureContentListeners.add(listener);
+            }
+        }
+
+        @Override
+        public void unregisterDisplaySecureContentListener(DisplaySecureContentListener listener) {
+            synchronized (mGlobalLock) {
+                mDisplaySecureContentListeners.remove(listener);
+            }
+        }
     }
 
     /** Called to inform window manager if non-Vr UI shoul be disabled or not. */
